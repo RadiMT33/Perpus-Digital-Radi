@@ -18,21 +18,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1.</td>
-                            <td>Radi Maulana Tsaqif</td>
-                            <td>Siswa</td>
-                            <td>24 Februari 2024, 23.31.00</td>
-                            <td>Baca buku</td>
-                        </tr>
-                    </tbody>
-                    <tbody>
-                        <tr>
-                            <td>2.</td>
-                            <td>Rabi Marbilah Agustin</td>
-                            <td>Siswa</td>
-                            <td>26 Februari 2024, 23.31.00</td>
-                            <td>Baca buku</td>
+                        <tr v-for="(visitors,i) in visitors" :key="i">
+                            <td>{{ i+1 }}.</td>
+                            <td>{{ visitors.nama }}</td>
+                            <td>{{ visitors.Keanggotaan.nama }}</td>
+                            <td>{{ visitors.tanggal }}, {{ visitors.waktu }}</td>
+                            <td>{{ visitors.Keperluan.nama }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -43,3 +34,17 @@
         </div>
     </div>
 </template>
+
+<script setup>
+const supabase = useSupabaseClient()
+
+const visitors = ref([])
+
+const getPengunjung =async () => {
+    const { data, error } = await supabase.from('Pengunjung').select('*, Keanggotaan(*), Keperluan(*)')
+    if(data) visitors.value = data
+}
+onMonted(() => {
+    getPengunjung()
+})
+</script>
