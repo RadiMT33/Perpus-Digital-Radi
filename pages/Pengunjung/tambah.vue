@@ -2,19 +2,18 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="text-center my-4">ISI BUKU KUNJUNGAN</h2>
+                <h2 class="text-center my-4">ISI DATA KUNJUNGAN</h2>
                 <form>
                     <div class="mb-3">
-                        <input type="text" placeholder="Nama..." class="form-control rounded-5 wp">
+                        <form @submit.prevent="kirimData">
+                        <input v-model="form.nama" type="text" placeholder="NAMA...">
+                        <select v-model="form.tingkat">
                     </div>
                     <div class="mb3">
                         <div class="text">
-                            <select class="form-control form-control-lg form-select rounded-5">
-                                <option value="">Keanggotaan</option>
-                                <option value="Siswa">Siswa</option>
-                                <option value="Guru">Guru</option>
-                                <option value="Staf">Staf</option>
-                                <option value="Umum">Umum</option>
+                            <select v-model="form.Keanggotaan">
+                                <option value="">KEANGGOTAAN</option>
+                                <option v-for="(member, i) in members" :key="i" :value="member.id">{{member.nama}}</option>
                             </select>
                         </div>
                     </div>
@@ -58,11 +57,9 @@
                     </div>
                     <div class="mb-3">
                         <div class="text">
-                            <select class="form-control form-control-lg form-select rounded-5">
-                                <option value="">Keperluan</option>
-                                <option value="Baca">Baca buku</option>
-                                <option value="Pinjam">Pinjam buku</option>
-                                <option value="Kembalikan">Kembalikan buku</option>
+                            <select v-model="form.Keperluan">
+                                <option value="">KEPERLUAN</option>
+                                <option v-for="(item, i) in objectives" :key="i" :value="item.id">{{ item.nama}}</option>
                             </select>
                         </div>
                     </div>
@@ -74,6 +71,38 @@
         </div>
     </div>
 </template>
+<script setup>
+const supabase = useSupabaseClient()
+
+const members = ref([])
+const objectives =ref([])
+
+const form = ref({
+    nama: "",
+    keanggotaan: "",
+    tingkat: "",
+    jurusan: "",
+    kelas: "",
+    keperluan: "",
+})
+
+const kirimData = async () => {
+    const { error } = await supabase.from('Pengunjung').insert([form.value])
+    if(!error) navigateTo('/Pengunjung')
+}
+const getKeanggotaan = async () => {
+    const {data, error } = await supabase.from('Keanggotaan').select('*')
+    if(data) members.value = data
+}
+const getKeperluan = async () => {
+    const {data, error } = await supabase.from('Keperluan').select('*')
+    if(data) objectives.value = data
+}
+onMounted(() => {
+    getKeanggotaan()
+    getKeperluan()
+})
+</script>
 
 <style scoped>
 .wp::-webkit-input-placeholder{
