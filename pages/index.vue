@@ -1,104 +1,96 @@
 <template>
   <div class="container-fluid">
-    <div class="row my-5 justify-content-evenly">
-      <div class="col-lg-5 box">
-        <nuxt-link to="../Pengunjung/Tambah">
-          <div class="card bg-Pengunjung rounded-5">
+    <div class="row my-5 d-flex justify-content-evenly ">
+      <div class="col-lg-6 box">
+        <NuxtLink to="/pengunjung/tambah">
+          <div class="card bg-pengunjung rounded-5">
             <div class="card-body">
               <h2>Pengunjung</h2>
             </div>
           </div>
-        </nuxt-link>
+        </NuxtLink>
       </div>
-      <div class="col-lg-5 box ">
-        <nuxt-link to="../Buku">
-          <div class="card bg-Buku rounded-5">
+      <div class="col-lg-6 box">
+        <NuxtLink to="/buku">
+          <div class="card bg-buku rounded-5">
             <div class="card-body">
-              <h2>Cari Buku</h2>
+              <h2>Buku</h2>
             </div>
           </div>
-        </nuxt-link>
+        </NuxtLink>
       </div>
     </div>
     <div class="statistik">
-      <h3><strong>STATISTIK</strong></h3>
+      <h1>STATISTIK</h1>
     </div>
-    <div class="Container-fluid">
-    <div class="row justify-content-evenly rounded-3">
-      <div class="col-5">
-        <div class="card1">
-          <div class="p1">
-            <h1>3</h1>
-            <h5>Pengunjung</h5>
+      <div class="row my-5 d-flex justify-content-evenly ">
+        <div class="col-lg-6 box">
+          <div class="card b2 rounded-5">
+            <div class="card-body text">
+              <h1 class="no">5</h1>
+              <h3 class="pt-4">Pengunjung</h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 box">
+          <div class="card b3 rounded-5">
+            <div class="card-body text">
+              <h1 class="no">30</h1>
+              <h3 class="pt-4">Buku</h3>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-5">
-        <div class="b1">
-          <h1>180</h1>
-          <h5>Buku</h5>
+      <div class="container">
+        <div class="row">
+          <Statistik />
         </div>
       </div>
     </div>
-  </div>
-  </div>
-  
-</template>
+  </template>
+
+<script setup>
+useHead({ title: "Home / PERPUSTAKAAN DIGITAL" })
+</script>
 
 <style scoped>
 .card {
-    height : 250px;
-    width: 105.5%;
-    box-shadow: 1px 1px 10px #424242;
-}
-.card.bg-Pengunjung {
-    background-image: url('../assets/img/PengusahaSukses.webp');
-    color: black;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-}
-.card.bg-Buku {
-    background: url('../assets/img/PengusahaSukses1.jpg') no-repeat center center;
-    color: black;
-    background-size: cover;
-}
-.card-body{
-  font-family: serif;
-}
-.p1 {
-  font-family: Arial, Helvetica, sans-serif;
   height: 250px;
-  width: 105.5%;
-  box-shadow: 1px 1px 10px;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgb(221, 211, 65);
 }
-.b1 {
-  font-family: Arial, Helvetica, sans-serif;
-  height: 250px;
-  width: 105.5%;
-  box-shadow: 1px 1px 10px;
-  border-radius: 25px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgb(41, 240, 124);
+.card.bg-pengunjung{
+  background-image: url('../assets/img/bg-hom-pengunjung.jpeg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  color: black;
 }
-h1{
-  font-weight: bolder;
+.card.bg-buku {
+  background: url('../assets/img/bg-home-perpus.jpeg') no-repeat center center;
+  background-size: cover;
+  color: black;
 }
-h5{
-  padding-top: 10px;
+.statistik {
+  color: rgba(181, 74, 74, 0.761);
+  margin-left: 50px;
+}
+.box{
+  width: 45%;
 }
 .box a{
   text-decoration: none;
 }
-.statistik{
-  padding-left: 25px;
-  padding-bottom: 30px;
+.b2{
+  background-color: #ffd0d0f2;
+}
+.b3{
+  background-color: rgba(181, 74, 74, 0.761);
+}
+.text{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.no{
+  font-size: 70px;
 }
 </style>
